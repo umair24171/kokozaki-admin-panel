@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "773220965064",
+    "project_id": "grocery-80ead",
+    "storage_bucket": "grocery-80ead.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:773220965064:android:0ccfbcb8162dbc412123fd",
+        "android_client_info": {
+          "package_name": "com.example.grocery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "773220965064-677sbjilpnuqgvadf3p6qfmj34r4epdi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.grocery",
+            "certificate_hash": "1b9e983684b75827e52cd87d87985f005d790e9f"
+          }
+        },
+        {
+          "client_id": "773220965064-go7rjau3mdv185vnqu593tdp13lim2kb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXifnq-OxIeTNVJUVi3lPS1wY9Y2ggx6U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "773220965064-go7rjau3mdv185vnqu593tdp13lim2kb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "773220965064-5cek0hnetl6tq8ffo43vlr0namgiom0t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.grocery"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:773220965064:android:bb64175de0bdc8d82123fd",
+        "android_client_info": {
+          "package_name": "com.myapp.kokzaki_admin_panel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "773220965064-go7rjau3mdv185vnqu593tdp13lim2kb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXifnq-OxIeTNVJUVi3lPS1wY9Y2ggx6U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "773220965064-go7rjau3mdv185vnqu593tdp13lim2kb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "773220965064-5cek0hnetl6tq8ffo43vlr0namgiom0t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.grocery"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
