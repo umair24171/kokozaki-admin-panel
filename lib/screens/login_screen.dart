@@ -4,9 +4,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:kokzaki_admin_panel/controllers/auth_controller.dart';
 import 'package:kokzaki_admin_panel/dashboard.dart';
 import 'package:kokzaki_admin_panel/helper/colors.dart';
 import 'package:kokzaki_admin_panel/helper/get_size.dart';
+import 'package:kokzaki_admin_panel/helper/loader.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -23,6 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
   FocusNode passwordFocusNode = FocusNode();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   bool isLoading = false;
+  var authController = Get.put(AuthController());
   @override
   void dispose() {
     _emailController.dispose();
@@ -34,6 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> _signInWithEmailAndPassword() async {
     try {
+      authController.setIsloadingValue(true);
       final String email = _emailController.text;
       final String password = _passwordController.text;
 
@@ -41,6 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
         email: email,
         password: password,
       );
+      authController.setIsloadingValue(false);
 
       // bool isAdmin = false;
       // for (int i = 0; i < snapshot.docs.length; i++) {
@@ -48,24 +54,21 @@ class _LoginScreenState extends State<LoginScreen> {
       //       {'isAdmin': true});
       // }
       if (userCredential.user != null) {
-        QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
-            .instance
-            .collection('admin')
-            .where("email", isEqualTo: email)
-            .get();
-        Map<String, dynamic> data =
-            snapshot.docs.first.data() as Map<String, dynamic>;
+        // QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
+        //     .instance
+        //     .collection('admin')
+        //     .where("email", isEqualTo: email)
+        //     .get();
+        // Map<String, dynamic> data = snapshot.docs.first.data();
 
-        if (data['password'] == password && data['isAdmin'] == true) {
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => Dashboard()));
-        }
+        // if (data['password'] == password && data['isAdmin'] == true) {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => Dashboard()));
+        // }
       }
       // Navigate to the next screen or perform any other action upon successful login
     } catch (e) {
-      setState(() {
-        isLoading = false;
-      });
+      authController.setIsloadingValue(false);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(e.toString()),
@@ -140,14 +143,48 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                       ),
                       const SizedBox(height: 16.0),
-                      CustomButton(
-                          text: "Login",
-                          icon: Icons.login,
-                          callBack: () {
-                            if (formKey.currentState!.validate()) {
-                              _signInWithEmailAndPassword();
-                            }
-                          })
+                      GestureDetector(
+                        onTap: () {
+                          if (formKey.currentState!.validate()) {
+                            _signInWithEmailAndPassword();
+                          }
+                        },
+                        child: Obx(
+                          () => Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                                color: primaryColor,
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(10))),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: authController.isLoading.value
+                                  ? spinKit
+                                  : const Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.login,
+                                          color: Colors.white,
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text(
+                                          'Login',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16,
+                                              fontFamily: 'Sofia-pro',
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ],
+                                    ),
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),

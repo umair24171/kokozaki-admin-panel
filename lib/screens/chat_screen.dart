@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:kokzaki_admin_panel/helper/colors.dart';
 import 'package:kokzaki_admin_panel/models/chat_model.dart';
@@ -8,7 +7,7 @@ import 'package:kokzaki_admin_panel/models/market_model.dart';
 import 'package:uuid/uuid.dart';
 
 class ChatScreen extends StatefulWidget {
-  ChatScreen({super.key});
+  const ChatScreen({super.key});
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -198,17 +197,17 @@ class MessageBubble extends StatelessWidget {
           children: [
             Text(sender),
             Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                margin: const EdgeInsets.symmetric(vertical: 4),
-                decoration: BoxDecoration(
-                  color: isMe ? primaryColor : Colors.grey[300],
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Text(
-                  text,
-                  style: TextStyle(color: isMe ? Colors.white : Colors.white),
-                )),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              margin: const EdgeInsets.symmetric(vertical: 4),
+              decoration: BoxDecoration(
+                color: isMe ? primaryColor : Colors.grey[300],
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Text(
+                text,
+                style: TextStyle(color: isMe ? Colors.white : Colors.black),
+              ),
+            ),
           ],
         ));
   }
